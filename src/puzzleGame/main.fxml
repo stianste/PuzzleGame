@@ -1,8 +1,13 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.StackPane?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="puzzleGame.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.Group?>
+<Pane prefHeight="720" prefWidth="1080" fx:controller="puzzleGame.Controller" xmlns:fx="http://javafx.com/fxml" >
+    <children>
+        <Rectangle fx:id="playerArea" fill="black" opacity="0.8" arcHeight="25" arcWidth="25" ></Rectangle>
+        <Rectangle fx:id="opponentArea" fill="black" opacity="0.8" arcHeight="25" arcWidth="25"></Rectangle>
+        <Group fx:id="playerCursor"></Group>
+    </children>
+
+</Pane>
