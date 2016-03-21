@@ -1,3 +1,5 @@
 *.idea
 *.swp
 PuzzleGame.iml
+out
+JavaFXSceneBuilder2.0/
