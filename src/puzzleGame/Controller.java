@@ -9,11 +9,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
-    @FXML
-    private Rectangle playerArea, opponentArea;
-    @FXML
-    private Group playerCursor;
-
+    @FXML private Rectangle playerArea, opponentArea;
+    @FXML private Group playerCursor;
 
     public Controller(){
 
@@ -25,8 +22,8 @@ public class Controller implements Initializable{
     }
 
     private void createPlayerCursor() {
-        Cursor c = new Cursor(Constants.cursorColor, Constants.playerCursorDefault_x, Constants.playerCursorDefault_y);
-        c.generateCursor(playerCursor);
+        Cursor cursor = new Cursor(playerCursor, Constants.playerCursorDefault_x, Constants.playerCursorDefault_y);
+        cursor.generateCursor(playerCursor);
     }
 
     private void setPlayerArea(){

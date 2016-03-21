@@ -22,9 +22,10 @@ public class Constants {
     squareHeight = fieldHeight/12,
 
     //Cursor
+    minCursorWidth = fieldPadding,
+    maxCursorWidth = fieldPadding + fieldWidth - 2*squareWidth,
+    minCursorHeight = playerField_y - squareHeight,
+    maxCursorHeight = playerField_y + fieldHeight - squareHeight,
     playerCursorDefault_x = fieldPadding + 2*squareWidth,
     playerCursorDefault_y = playerField_y + (fieldHeight/2);
-
-    public final static Color cursorColor = Color.WHITE;
-
 }

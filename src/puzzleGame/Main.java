@@ -13,6 +13,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Puzzle Game");
         primaryStage.setScene(new Scene(root, Constants.gameWidth, Constants.gameHeight));
+        primaryStage.getScene().setOnKeyPressed(keyEvent -> Cursor.moveCursor(keyEvent));
         primaryStage.show();
     }
 

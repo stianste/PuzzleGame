@@ -3,7 +3,8 @@
 
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.Group?>
-<Pane prefHeight="720" prefWidth="1080" fx:controller="puzzleGame.Controller" xmlns:fx="http://javafx.com/fxml" >
+<?import javafx.scene.control.Button?>
+<Pane prefHeight="720" prefWidth="1080" fx:controller="puzzleGame.Controller" fx:id="mainPane" xmlns:fx="http://javafx.com/fxml" >
     <children>
         <Rectangle fx:id="playerArea" fill="black" opacity="0.8" arcHeight="25" arcWidth="25" ></Rectangle>
         <Rectangle fx:id="opponentArea" fill="black" opacity="0.8" arcHeight="25" arcWidth="25"></Rectangle>
