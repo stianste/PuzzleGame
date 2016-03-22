@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 //TODO: Figure out how to refer to constant variables in the fxml
 
 public class Controller implements Initializable{
-    @FXML private Rectangle playerArea, opponentArea, playerBottomRowHider, opponentBottomRowHider;
+    @FXML private Rectangle playerBottomRowHider, opponentBottomRowHider;
     @FXML private Group playerCursor;
     @FXML private Pane mainPane;
 
