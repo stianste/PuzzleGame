@@ -16,12 +16,7 @@ public class Controller implements Initializable{
     @FXML private Group playerCursor;
     @FXML private Pane mainPane;
 
-    public Controller(){
-
-    }
     private void start(){
-        setPlayerArea();
-        setOpponentArea();
         createPlayerCursor();
         createGrids();
         addHiders();
@@ -29,16 +24,6 @@ public class Controller implements Initializable{
     private void addHiders(){
         playerBottomRowHider.toFront();
         opponentBottomRowHider.toFront();
-
-        playerBottomRowHider.setWidth(Constants.fieldWidth);
-        playerBottomRowHider.setHeight(Constants.squareHeight);
-        playerBottomRowHider.relocate(Constants.playerField_x,
-                Constants.playerField_y + Constants.fieldHeight);
-
-        opponentBottomRowHider.setWidth(Constants.fieldWidth);
-        opponentBottomRowHider.setHeight(Constants.squareHeight);
-        opponentBottomRowHider.relocate(Constants.opponentField_x,
-                Constants.opponentField_y + Constants.fieldHeight);
     }
 
     private void createGrids() {
@@ -50,21 +35,6 @@ public class Controller implements Initializable{
     private void createPlayerCursor() {
         Cursor cursor = new Cursor(playerCursor, Constants.playerCursorDefault_x, Constants.playerCursorDefault_y);
         cursor.generateCursor(playerCursor);
-    }
-
-    private void setPlayerArea(){
-        //playerArea.setWidth(Constants.fieldWidth);
-        //playerArea.setHeight(Constants.fieldHeight);
-
-        playerArea.setX(Constants.playerField_x);
-        playerArea.setY(Constants.playerField_y);
-    }
-    private void setOpponentArea(){
-        opponentArea.setWidth(Constants.fieldWidth);
-        opponentArea.setHeight(Constants.fieldHeight);
-
-        opponentArea.setX(Constants.opponentField_x);
-        opponentArea.setY(Constants.opponentField_y);
     }
 
     @Override

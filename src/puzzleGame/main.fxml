@@ -7,23 +7,28 @@
 <Pane prefHeight="720" prefWidth="1080" fx:controller="puzzleGame.Controller" fx:id="mainPane" xmlns:fx="http://javafx.com/fxml" >
     <fx:define>
         <Constants fx:id="fieldWidth" fx:constant="fieldWidth"/>
-    </fx:define>
-    <fx:define>
         <Constants fx:id="fieldHeight" fx:constant="fieldHeight"/>
-    </fx:define>
-    <fx:define>
         <Constants fx:id="playerField_x" fx:constant="playerField_x"/>
-    </fx:define>
-    <fx:define>
-        <Constants fx:id="playerField_y" fx:constant="playerField_x"/>
+        <Constants fx:id="playerField_y" fx:constant="playerField_y"/>
+        <Constants fx:id="opponentField_x" fx:constant="opponentField_x"/>
+        <Constants fx:id="opponentField_y" fx:constant="opponentField_y"/>
+        <Constants fx:id="playerHiderY" fx:constant="playerHiderY"/>
+        <Constants fx:id="opponentHiderY" fx:constant="opponentHiderY"/>
     </fx:define>
 
     <children>
         <Rectangle fx:id="playerArea" width="$fieldWidth" height="$fieldHeight"
                    fill="black" opacity="0.8" arcHeight="25" arcWidth="25" x="$playerField_x" y="$playerField_y" ></Rectangle>
-        <Rectangle fx:id="opponentArea" width="$fieldWidth" height="$fieldHeight" fill="black" opacity="0.8" arcHeight="25" arcWidth="25"></Rectangle>
-        <Rectangle fx:id="playerBottomRowHider" fill="WHITE"></Rectangle>
-        <Rectangle fx:id="opponentBottomRowHider" fill="WHITE"></Rectangle>
+
+        <Rectangle fx:id="opponentArea" width="$fieldWidth" height="$fieldHeight" x="$opponentField_x" y="$opponentField_y"
+                   fill="black" opacity="0.8" arcHeight="25" arcWidth="25" ></Rectangle>
+
+        <Rectangle fx:id="playerBottomRowHider" fill="WHITE" width="$fieldWidth" height="$fieldHeight"
+                x="$playerField_x" y="$playerHiderY"></Rectangle>
+
+        <Rectangle fx:id="opponentBottomRowHider" fill="WHITE" width="$fieldWidth" height="$fieldHeight"
+                x="$opponentField_x" y="$opponentHiderY"></Rectangle>
+
         <Group fx:id="playerCursor"></Group>
     </children>
 
