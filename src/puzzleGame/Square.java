@@ -1,15 +1,16 @@
 package puzzleGame;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Square {
     private Color color;
-    private int posx;
-    private int posy;
+    private double posx;
+    private double posy;
 
-    public Square(Color c, int x, int y){
+    public Square(Color c, double x, double y){
         color = c;
         posx = x;
         posy = y;
@@ -19,7 +20,7 @@ public class Square {
         return color;
     }
 
-    public int getPosx() {
+    public double getPosx() {
         return posx;
     }
 
@@ -31,12 +32,13 @@ public class Square {
         this.posy = posy;
     }
 
-    public int getPosy() {
+    public double getPosy() {
         return posy;
     }
 
     public void addTo(Pane pane) {
-        Rectangle rekt = new Rectangle(posx, posy, color);
+        Rectangle rekt = new Rectangle(posx, posy, Constants.squareWidth, Constants.squareHeight);
+        rekt.setFill(color);
         rekt.setArcHeight(Constants.squareArchHeight);
         rekt.setArcWidth(Constants.squareArchWidth);
         pane.getChildren().add(rekt);

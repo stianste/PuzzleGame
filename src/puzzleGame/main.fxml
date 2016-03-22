@@ -4,10 +4,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import puzzleGame.Constants?>
 <Pane prefHeight="720" prefWidth="1080" fx:controller="puzzleGame.Controller" fx:id="mainPane" xmlns:fx="http://javafx.com/fxml" >
     <children>
         <Rectangle fx:id="playerArea" fill="black" opacity="0.8" arcHeight="25" arcWidth="25" ></Rectangle>
         <Rectangle fx:id="opponentArea" fill="black" opacity="0.8" arcHeight="25" arcWidth="25"></Rectangle>
+        <Rectangle fx:id="playerBottomRowHider" fill="WHITE"></Rectangle>
+        <Rectangle fx:id="opponentBottomRowHider" fill="WHITE"></Rectangle>
         <Group fx:id="playerCursor"></Group>
     </children>
 

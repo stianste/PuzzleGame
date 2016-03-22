@@ -9,8 +9,10 @@ import javafx.scene.shape.Rectangle;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//TODO: Figure out how to refer to constant variables in the fxml
+
 public class Controller implements Initializable{
-    @FXML private Rectangle playerArea, opponentArea;
+    @FXML private Rectangle playerArea, opponentArea, playerBottomRowHider, opponentBottomRowHider;
     @FXML private Group playerCursor;
     @FXML private Pane mainPane;
 
@@ -22,11 +24,26 @@ public class Controller implements Initializable{
         setOpponentArea();
         createPlayerCursor();
         createGrids();
+        addHiders();
+    }
+    private void addHiders(){
+        playerBottomRowHider.toFront();
+        opponentBottomRowHider.toFront();
+
+        playerBottomRowHider.setWidth(Constants.fieldWidth);
+        playerBottomRowHider.setHeight(Constants.squareHeight);
+        playerBottomRowHider.relocate(Constants.playerField_x,
+                Constants.playerField_y + Constants.fieldHeight);
+
+        opponentBottomRowHider.setWidth(Constants.fieldWidth);
+        opponentBottomRowHider.setHeight(Constants.squareHeight);
+        opponentBottomRowHider.relocate(Constants.opponentField_x,
+                Constants.opponentField_y + Constants.fieldHeight);
     }
 
     private void createGrids() {
-        Grid playerGrid = new Grid((int) Constants.playerField_x, (int) Constants.playerField_y, mainPane);
-        Grid opponentGrid = new Grid((int) Constants.opponentField_x, (int) Constants.opponentField_y, mainPane);
+        Grid playerGrid = new Grid(Constants.playerField_x, Constants.playerField_y, mainPane);
+        Grid opponentGrid = new Grid(Constants.opponentField_x, Constants.opponentField_y, mainPane);
 
     }
 

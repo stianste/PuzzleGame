@@ -12,17 +12,19 @@ public class Grid {
     private Pane pane;
     private int[][] grid = new int[(int)Constants.numberOfSquaresHeight+1][(int)Constants.numberOfSquaresWidth];
 
-    public Grid(int startX, int startY, Pane p){
+    public Grid(double startX, double startY, Pane p){
         this.pane = p;
         initializeGrid();
         drawSquares(startX, startY);
     }
 
-    private void drawSquares(int startX, int startY) {
+    private void drawSquares(double startX, double startY) {
         for (int i = 0; i < grid.length; i++){
-            for(int j = 0; j < grid[0].length; j++){
-                if(grid[i][j] != 0){
-                    Square s = new Square(Constants.squareTypes[grid[i][j]], startX + j*((int) Constants.squareWidth), startY + i*((int)Constants.squareHeight));
+            for(int j = 0; j < grid[i].length; j++){
+                int val = grid[i][j];
+                if(val != -1){
+                    Square s = new Square(Constants.squareTypes[val], startX + j*(Constants.squareWidth),
+                            startY + i*(Constants.squareHeight));
                     s.addTo(pane);
                 }
             }
@@ -39,18 +41,18 @@ public class Grid {
         TODO: implement using an even amount of the same values, distributed randomly.
         */
 
-        //First fill array with only 0s.
+        //First fill array with only -1 to indicate empty slots.
         for (int i = 0; i < grid.length; i++){
-            for(int j = 0; j < grid[0].length; j++){
-                grid[i][j] = 0;
+            for(int j = 0; j < grid[i].length; j++){
+                grid[i][j] = -1;
             }
         }
 
-        for(int i = grid.length-1; i == grid.length - Constants.numberOfStartRows + 1; i--){
-            for(int j = 0; j < grid[0].length; i++){
-                int value = rand.nextInt(Constants.squareTypes.length + 1);
+        for(int i = grid.length-1; i >= grid.length - (Constants.numberOfStartRows + 1); i--){
+            for(int j = 0; j < grid[i].length; j++){
+                int value = rand.nextInt(Constants.squareTypes.length);
                 if(threeInARow(i,j,value)){
-                    value = (value == grid.length-1) ? 1 : value + 1;
+                    value = (value == (grid[0].length-2)) ? 0 : value + 1;
                 }
                 grid[i][j] = value;
             }
@@ -61,12 +63,15 @@ public class Grid {
         Squares - of the same type - in a row. Assumes that the grid is being filled bottom up, from left to right.
          */
 
-        if(grid[row][col-1] == value && grid[row][col-2] == value) return true;
-
-        try{ if(grid[row-1][col] == value && grid[row-2][col] == value) return true; }
-
-        catch(ArrayIndexOutOfBoundsException e){
-            return false;
+        try{
+            if(grid[row][col-1] == value && grid[row][col-2] == value) return true;
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+        }
+        try{
+            if(grid[row+1][col] == value && grid[row+2][col] == value) return true;
+        }
+        catch(ArrayIndexOutOfBoundsException e2){
         }
         return false;
     }
