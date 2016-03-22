@@ -53,8 +53,8 @@ public class Controller implements Initializable{
     }
 
     private void setPlayerArea(){
-        playerArea.setWidth(Constants.fieldWidth);
-        playerArea.setHeight(Constants.fieldHeight);
+        //playerArea.setWidth(Constants.fieldWidth);
+        //playerArea.setHeight(Constants.fieldHeight);
 
         playerArea.setX(Constants.playerField_x);
         playerArea.setY(Constants.playerField_y);

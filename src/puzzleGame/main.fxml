@@ -3,12 +3,25 @@
 
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
 <?import puzzleGame.Constants?>
 <Pane prefHeight="720" prefWidth="1080" fx:controller="puzzleGame.Controller" fx:id="mainPane" xmlns:fx="http://javafx.com/fxml" >
+    <fx:define>
+        <Constants fx:id="fieldWidth" fx:constant="fieldWidth"/>
+    </fx:define>
+    <fx:define>
+        <Constants fx:id="fieldHeight" fx:constant="fieldHeight"/>
+    </fx:define>
+    <fx:define>
+        <Constants fx:id="playerField_x" fx:constant="playerField_x"/>
+    </fx:define>
+    <fx:define>
+        <Constants fx:id="playerField_y" fx:constant="playerField_x"/>
+    </fx:define>
+
     <children>
-        <Rectangle fx:id="playerArea" fill="black" opacity="0.8" arcHeight="25" arcWidth="25" ></Rectangle>
-        <Rectangle fx:id="opponentArea" fill="black" opacity="0.8" arcHeight="25" arcWidth="25"></Rectangle>
+        <Rectangle fx:id="playerArea" width="$fieldWidth" height="$fieldHeight"
+                   fill="black" opacity="0.8" arcHeight="25" arcWidth="25" x="$playerField_x" y="$playerField_y" ></Rectangle>
+        <Rectangle fx:id="opponentArea" width="$fieldWidth" height="$fieldHeight" fill="black" opacity="0.8" arcHeight="25" arcWidth="25"></Rectangle>
         <Rectangle fx:id="playerBottomRowHider" fill="WHITE"></Rectangle>
         <Rectangle fx:id="opponentBottomRowHider" fill="WHITE"></Rectangle>
         <Group fx:id="playerCursor"></Group>
