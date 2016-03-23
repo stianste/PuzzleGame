@@ -31,12 +31,10 @@ public class Square {
 
     public void setPosx(int posx) {
         this.posx = posx;
-        System.out.println("Square x set to: " + posx);
     }
 
     public void setPosy(int posy) {
         this.posy = posy;
-        System.out.println("Square y set to: " + posy);
     }
 
     public double getPosy() {
@@ -69,9 +67,14 @@ public class Square {
         rekt.setArcWidth(Constants.squareArchWidth);
         pane.getChildren().add(rekt);
     }
-    //Used for testing, should be removed eventually
     public void setColor(Color c){
+        //Used for testing, should be removed eventually
         this.color = c;
         this.rekt.setFill(c);
+    }
+
+    public void remove(Pane p) {
+        p.getChildren().remove(this.rekt);
+        this.rekt = null;
     }
 }

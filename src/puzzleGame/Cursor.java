@@ -30,7 +30,6 @@ public class Cursor {
         this.grid = grid;
         grid.setX(x);
         grid.setY(y);
-
     }
 
     public void generateCursor(Group g){
@@ -64,7 +63,6 @@ public class Cursor {
         group.relocate(posX, posY);
         grid.setX(x);
         grid.setY(y);
-
     }
 
     private static void switchSquares() {
@@ -74,8 +72,8 @@ public class Cursor {
         grid.switchSquares(x, y);
         left.moveRight();
         right.moveLeft();
+        grid.removeSquares(x, y);
     }
-
 
     private static void left() {
         if(!(posX - Constants.squareWidth < Constants.minCursorWidth)){

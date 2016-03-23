@@ -9,11 +9,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static java.util.Arrays.stream;
 
 public class Grid {
 
     private Pane pane;
-    //Add 1 to the height to have add the bottom row.
+    //Add 1 to the height to account for the bottom row.
     private int[][] grid = new int[(int)Constants.numberOfSquaresHeight+1][(int)Constants.numberOfSquaresWidth];
     //Be aware that x = column, y = row
     private int x = 0;
@@ -67,6 +70,7 @@ public class Grid {
             }
         }
     }
+
     private boolean threeInARow(int row, int col, int value){
         /* A naive approach to checking whether inserting the current value will result in starting with three
         Squares - of the same type - in a row. Assumes that the grid is being filled bottom up, from left to right.
@@ -87,20 +91,66 @@ public class Grid {
 
     public void setX(int x) {
         this.x = x;
-        System.out.println("Grid x: " + x);
     }
 
     public void setY(int y) {
         this.y = y;
-        System.out.println("Grid y: " + y);
     }
+
     public Square findMatchingSquare(int x, int y){
         return this.squares.stream().filter(s -> s.getX() == x && s.getY() == y).collect(Collectors.toList()).get(0);
     }
 
     public void switchSquares(int x, int y) {
         int temp = grid[y][x];
-        grid[y][x] = grid[y+1][x];
-        grid[y+1][x] = temp;
+        grid[y][x] = grid[y][x+1];
+        grid[y][x+1] = temp;
+    }
+    public void removeSquares(int x, int y){
+        removeHorizontally(x, y);
+        removeHorizontally(x+1,y);
+    }
+    private void removeHorizontally(int x, int y){
+        //Very naive approach to finding how many squares in a row match horizontally.
+        //Could be implemented in a better way later
+        int value = grid[y][x];
+        System.out.println("Value: " +value);
+        int currList = 0;
+
+        List<ArrayList<Integer>> ll = new ArrayList<ArrayList<Integer>>();
+
+        ll.add(new ArrayList<Integer>());
+        stream(grid[y]).forEach(e -> System.out.print(e + " "));
+
+        for (int i = 0; i < grid[y].length; i++){
+            if(grid[y][i] == value){
+                System.out.println("Value match!");
+                ll.get(currList).add(i);
+            }
+            else{
+                ll.add(new ArrayList<Integer>());
+                currList += 1;
+            }
+        }
+        List<ArrayList<Integer>> sequence = ll.stream().filter(list -> list.size() >= 3).collect(Collectors.toList());
+        if(sequence.size() == 0){
+            return;
+        }
+
+        System.out.println("Sequence size > 0!");
+        if(sequence.size() > 1){
+            System.out.println("Size of candidates was bigger than 1");
+            //This would mean we have two lists of three consecutive each. Return all six squares
+            sequence.get(0).addAll(sequence.get(1));
+        }
+        sequence.get(0).stream().forEach(i -> System.out.println(i));
+        sequence.get(0).stream().forEach(i -> {
+            this.squares.stream().filter(s -> s.getX() == i && s.getY() == y).forEach(square -> {
+                grid[square.getY()][square.getX()] = -1;
+                square.remove(this.pane);
+                System.out.println("Square removed!");
+                square = null;
+            });
+        });
     }
 }
