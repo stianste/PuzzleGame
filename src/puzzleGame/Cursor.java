@@ -18,14 +18,18 @@ public class Cursor {
     private static double posY;
     public static Group group;
     private static Grid grid;
+    private static int x;
+    private static int y;
 
-    public Cursor(Group g, double x, double y, Grid grid){
-        posX = x;
-        posY = y;
+    public Cursor(Group g, double posx, double posy, int x, int y, Grid grid){
+        posX = posx;
+        posY = posy;
+        this.x = x;
+        this.y = y;
         this.group = g;
         this.grid = grid;
-        grid.setX(this.getGridPosX());
-        grid.setY(this.getGridPosY());
+        grid.setX(x);
+        grid.setY(y);
 
     }
 
@@ -58,16 +62,16 @@ public class Cursor {
 
     private static void updateLocation(Group g) {
         group.relocate(posX, posY);
-        grid.setX(getGridPosX());
-        grid.setY(getGridPosY());
+        grid.setX(x);
+        grid.setY(y);
 
     }
 
     private static void switchSquares() {
         //-1 at the y position to account for the extra row.
-        Square left = grid.findMatchingSquare(getGridPosX(), getGridPosY()-1);
-        Square right = grid.findMatchingSquare(getGridPosX()+1, getGridPosY()-1);
-        grid.switchSquares(getGridPosY(), getGridPosX());
+        Square left = grid.findMatchingSquare(x, y);
+        Square right = grid.findMatchingSquare(x+1, y);
+        grid.switchSquares(x, y);
         left.moveRight();
         right.moveLeft();
     }
@@ -76,32 +80,42 @@ public class Cursor {
     private static void left() {
         if(!(posX - Constants.squareWidth < Constants.minCursorWidth)){
             posX -= Constants.squareWidth;
+            x -= 1;
         }
     }
 
     private static void right() {
         if(!(posX + Constants.squareWidth > Constants.maxCursorWidth)) {
             posX += Constants.squareWidth;
+            x += 1;
         }
     }
 
     private static void down() {
         if(!(posY + Constants.squareHeight > Constants.maxCursorHeight)) {
             posY += Constants.squareHeight;
+            y += 1;
         }
     }
 
     private static void up() {
         if(!(posY - Constants.squareHeight < Constants.minCursorHeight)){
             posY -= Constants.squareHeight;
+            y -= 1;
         }
     }
+    /*
     public static int getGridPosX(){
-        System.out.println(posX);
-        return (int) Math.floor((posX - Constants.playerField_x)/(Constants.squareWidth));
+        //Remember to make this one return statement when not printing
+        int n = (int) Math.floor((posX - Constants.playerField_x)/(Constants.squareWidth));
+        System.out.println("Get grid pos: " + n);
+        return n;
     }
 
     public static int getGridPosY(){
-        return (int) Math.floor((posY - Constants.playerField_y)/(Constants.squareHeight) + 1);
+        int n = (int) Math.floor((posY - Constants.playerField_y)/(Constants.squareHeight) + 1);
+        System.out.println("Get grid pos: " + n);
+        return n;
     }
+    */
 }

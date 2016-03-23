@@ -13,7 +13,9 @@ import java.util.stream.IntStream;
 public class Grid {
 
     private Pane pane;
+    //Add 1 to the height to have add the bottom row.
     private int[][] grid = new int[(int)Constants.numberOfSquaresHeight+1][(int)Constants.numberOfSquaresWidth];
+    //Be aware that x = column, y = row
     private int x = 0;
     private int y = 0;
     private List<Square> squares = new ArrayList<Square>();
@@ -93,13 +95,12 @@ public class Grid {
         System.out.println("Grid y: " + y);
     }
     public Square findMatchingSquare(int x, int y){
-        System.out.println(squares.stream().anyMatch(s -> s.getX() == x && s.getY() == y));
         return this.squares.stream().filter(s -> s.getX() == x && s.getY() == y).collect(Collectors.toList()).get(0);
     }
 
     public void switchSquares(int x, int y) {
-        int temp = grid[x][y];
-        grid[x][y] = grid[x+1][y];
-        grid[x+1][y] = temp;
+        int temp = grid[y][x];
+        grid[y][x] = grid[y+1][x];
+        grid[y+1][x] = temp;
     }
 }

@@ -41,7 +41,7 @@ public class Constants {
 
     public final static int
     outOfPlaceSquares = 4,
-    numberOfStartRows = 5;
+    numberOfStartRows = 12;
 
     public final static Color[] squareTypes = new Color[]{Color.SALMON, Color.DARKTURQUOISE, Color.ORCHID, Color.LAWNGREEN, Color.GOLD};
     public final static Color cursorColor = Color.WHITE;
