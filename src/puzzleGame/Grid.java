@@ -4,13 +4,21 @@ import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Grid {
 
     private Pane pane;
+    //Add 1 to the height to have add the bottom row.
     private int[][] grid = new int[(int)Constants.numberOfSquaresHeight+1][(int)Constants.numberOfSquaresWidth];
+    //Be aware that x = column, y = row
+    private int x = 0;
+    private int y = 0;
+    private List<Square> squares = new ArrayList<Square>();
 
     public Grid(double startX, double startY, Pane p){
         this.pane = p;
@@ -24,8 +32,9 @@ public class Grid {
                 int val = grid[i][j];
                 if(val != -1){
                     Square s = new Square(Constants.squareTypes[val], startX + j*(Constants.squareWidth),
-                            startY + i*(Constants.squareHeight));
+                            startY + i*(Constants.squareHeight), j,i);
                     s.addTo(pane);
+                    squares.add(s);
                 }
             }
         }
@@ -74,5 +83,24 @@ public class Grid {
         catch(ArrayIndexOutOfBoundsException e2){
         }
         return false;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+        System.out.println("Grid x: " + x);
+    }
+
+    public void setY(int y) {
+        this.y = y;
+        System.out.println("Grid y: " + y);
+    }
+    public Square findMatchingSquare(int x, int y){
+        return this.squares.stream().filter(s -> s.getX() == x && s.getY() == y).collect(Collectors.toList()).get(0);
+    }
+
+    public void switchSquares(int x, int y) {
+        int temp = grid[y][x];
+        grid[y][x] = grid[y+1][x];
+        grid[y+1][x] = temp;
     }
 }

@@ -9,11 +9,16 @@ public class Square {
     private Color color;
     private double posx;
     private double posy;
+    private int x;
+    private int y;
+    private Rectangle rekt;
 
-    public Square(Color c, double x, double y){
+    public Square(Color c, double posx, double posy, int x, int y){
         color = c;
-        posx = x;
-        posy = y;
+        this.posx = posx;
+        this.posy = posy;
+        this.x = x;
+        this.y = y;
     }
 
     public Color getColor() {
@@ -26,21 +31,47 @@ public class Square {
 
     public void setPosx(int posx) {
         this.posx = posx;
+        System.out.println("Square x set to: " + posx);
     }
 
     public void setPosy(int posy) {
         this.posy = posy;
+        System.out.println("Square y set to: " + posy);
     }
 
     public double getPosy() {
         return posy;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void moveLeft(){
+        this.x -= 1;
+        this.posx -= Constants.squareWidth;
+        this.rekt.relocate(posx, posy);
+    }
+
+    public void moveRight(){
+        this.x += 1;
+        this.posx += Constants.squareWidth;
+        this.rekt.relocate(posx, posy);
+    }
     public void addTo(Pane pane) {
-        Rectangle rekt = new Rectangle(posx, posy, Constants.squareWidth, Constants.squareHeight);
+        this.rekt = new Rectangle(posx, posy, Constants.squareWidth, Constants.squareHeight);
         rekt.setFill(color);
         rekt.setArcHeight(Constants.squareArchHeight);
         rekt.setArcWidth(Constants.squareArchWidth);
         pane.getChildren().add(rekt);
+    }
+    //Used for testing, should be removed eventually
+    public void setColor(Color c){
+        this.color = c;
+        this.rekt.setFill(c);
     }
 }

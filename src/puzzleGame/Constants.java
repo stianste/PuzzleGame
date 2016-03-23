@@ -1,6 +1,7 @@
 package puzzleGame;
 
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class Constants {
     public final static double
@@ -32,6 +33,7 @@ public class Constants {
     maxCursorHeight = playerField_y + fieldHeight - squareHeight,
     playerCursorDefault_x = fieldPadding + 2*squareWidth,
     playerCursorDefault_y = playerField_y + (fieldHeight/2),
+    cursorStroke = 2,
 
     //Hiders
     playerHiderY = playerField_y + fieldHeight,
@@ -39,7 +41,8 @@ public class Constants {
 
     public final static int
     outOfPlaceSquares = 4,
-    numberOfStartRows = 5;
+    numberOfStartRows = 12;
 
     public final static Color[] squareTypes = new Color[]{Color.SALMON, Color.DARKTURQUOISE, Color.ORCHID, Color.LAWNGREEN, Color.GOLD};
+    public final static Color cursorColor = Color.WHITE;
 }

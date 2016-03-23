@@ -1,5 +1,6 @@
 package puzzleGame;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -16,9 +17,12 @@ public class Controller implements Initializable{
     @FXML private Group playerCursor;
     @FXML private Pane mainPane;
 
+    private static Grid playerGrid;
+    private static Grid opponentGrid;
+
     private void start(){
-        createPlayerCursor();
         createGrids();
+        createPlayerCursor();
         addHiders();
     }
     private void addHiders(){
@@ -27,13 +31,17 @@ public class Controller implements Initializable{
     }
 
     private void createGrids() {
-        Grid playerGrid = new Grid(Constants.playerField_x, Constants.playerField_y, mainPane);
-        Grid opponentGrid = new Grid(Constants.opponentField_x, Constants.opponentField_y, mainPane);
-
+        this.playerGrid = new Grid(Constants.playerField_x, Constants.playerField_y, mainPane);
+        this.opponentGrid = new Grid(Constants.opponentField_x, Constants.opponentField_y, mainPane);
     }
 
     private void createPlayerCursor() {
-        Cursor cursor = new Cursor(playerCursor, Constants.playerCursorDefault_x, Constants.playerCursorDefault_y);
+        double x = Constants.playerCursorDefault_x;
+        double y = Constants.playerCursorDefault_y;
+        Cursor cursor = new Cursor(playerCursor, x, y,
+                (int) Math.floor(x/Constants.squareWidth - 1),
+                (int) Math.floor(y/Constants.squareHeight),
+                this.playerGrid);
         cursor.generateCursor(playerCursor);
     }
 
