@@ -9,11 +9,16 @@ public class Square {
     private Color color;
     private double posx;
     private double posy;
+    private int x;
+    private int y;
+    private Rectangle rekt;
 
-    public Square(Color c, double x, double y){
+    public Square(Color c, double posx, double posy, int x, int y){
         color = c;
-        posx = x;
-        posy = y;
+        this.posx = posx;
+        this.posy = posy;
+        this.x = x;
+        this.y = y;
     }
 
     public Color getColor() {
@@ -36,8 +41,29 @@ public class Square {
         return posy;
     }
 
+    public int getX() {
+        System.out.println("Square x: " + x);
+        return x;
+    }
+
+    public int getY() {
+        System.out.println("Square y: " + y);
+        return y;
+    }
+
+    public void moveLeft(){
+        this.x -= 1;
+        this.posx -= Constants.squareWidth;
+        this.rekt.relocate(posx, posy);
+    }
+
+    public void moveRight(){
+        this.x += 1;
+        this.posx += Constants.squareWidth;
+        this.rekt.relocate(posx, posy);
+    }
     public void addTo(Pane pane) {
-        Rectangle rekt = new Rectangle(posx, posy, Constants.squareWidth, Constants.squareHeight);
+        this.rekt = new Rectangle(posx, posy, Constants.squareWidth, Constants.squareHeight);
         rekt.setFill(color);
         rekt.setArcHeight(Constants.squareArchHeight);
         rekt.setArcWidth(Constants.squareArchWidth);
