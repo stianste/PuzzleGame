@@ -97,6 +97,10 @@ public class Grid {
         this.y = y;
     }
 
+    public int getValueAt(int x, int y){
+        return grid[y][x];
+    }
+
     public Square findMatchingSquare(int x, int y){
         return this.squares.stream().filter(s -> s.getX() == x && s.getY() == y).collect(Collectors.toList()).get(0);
     }
@@ -107,24 +111,22 @@ public class Grid {
         grid[y][x+1] = temp;
     }
     public void removeSquares(int x, int y){
-        removeHorizontally(x, y);
-        removeHorizontally(x+1,y);
+        removeHorizontally(grid[y][x], x, y);
+        removeHorizontally(grid[y][x+1], x + 1, y);
+        removeVertically(grid[y][x], x, y);
+        removeVertically(grid[y][x+1], x + 1, y);
     }
-    private void removeHorizontally(int x, int y){
-        //Very naive approach to finding how many squares in a row match horizontally.
-        //Could be implemented in a better way later
-        int value = grid[y][x];
-        System.out.println("Value: " +value);
+    private void removeVertically(int value, int x, int y){
         int currList = 0;
 
         List<ArrayList<Integer>> ll = new ArrayList<ArrayList<Integer>>();
 
         ll.add(new ArrayList<Integer>());
-        stream(grid[y]).forEach(e -> System.out.print(e + " "));
+        stream(grid).forEach(e -> System.out.print(e[x] + " "));
+        System.out.println();
 
-        for (int i = 0; i < grid[y].length; i++){
-            if(grid[y][i] == value){
-                System.out.println("Value match!");
+        for (int i = 0; i < grid.length; i++){
+            if(grid[i][x] == value){
                 ll.get(currList).add(i);
             }
             else{
@@ -137,18 +139,44 @@ public class Grid {
             return;
         }
 
-        System.out.println("Sequence size > 0!");
-        if(sequence.size() > 1){
-            System.out.println("Size of candidates was bigger than 1");
-            //This would mean we have two lists of three consecutive each. Return all six squares
-            sequence.get(0).addAll(sequence.get(1));
+        sequence.subList(1, sequence.size()).stream().forEach(list -> sequence.get(0).addAll(list));
+
+        sequence.get(0).stream().forEach(i -> {
+            this.squares.stream().filter(s -> s.getX() == x && s.getY() == i).forEach(square -> {
+                grid[square.getY()][square.getX()] = -1;
+                square.remove(this.pane);
+                square = null;
+            });
+        });
+    }
+
+    private void removeHorizontally(int value, int x, int y){
+        int currList = 0;
+
+        List<ArrayList<Integer>> ll = new ArrayList<ArrayList<Integer>>();
+
+        ll.add(new ArrayList<Integer>());
+
+        for (int i = 0; i < grid[y].length; i++){
+            if(grid[y][i] == value){
+                ll.get(currList).add(i);
+            }
+            else{
+                ll.add(new ArrayList<Integer>());
+                currList += 1;
+            }
         }
-        sequence.get(0).stream().forEach(i -> System.out.println(i));
+        List<ArrayList<Integer>> sequence = ll.stream().filter(list -> list.size() >= 3).collect(Collectors.toList());
+        if(sequence.size() == 0){
+            return;
+        }
+
+        sequence.subList(1, sequence.size()).stream().forEach(list -> sequence.get(0).addAll(list));
+
         sequence.get(0).stream().forEach(i -> {
             this.squares.stream().filter(s -> s.getX() == i && s.getY() == y).forEach(square -> {
                 grid[square.getY()][square.getX()] = -1;
                 square.remove(this.pane);
-                System.out.println("Square removed!");
                 square = null;
             });
         });
