@@ -31,6 +31,7 @@ public class Square {
 
     public void setPosx(int posx) {
         this.posx = posx;
+        this.rekt.relocate(this.posx, posy);
     }
 
     public void setPosy(int posy) {
@@ -67,14 +68,15 @@ public class Square {
         rekt.setArcWidth(Constants.squareArchWidth);
         pane.getChildren().add(rekt);
     }
-    public void setColor(Color c){
-        //Used for testing, should be removed eventually
-        this.color = c;
-        this.rekt.setFill(c);
-    }
 
     public void remove(Pane p) {
         p.getChildren().remove(this.rekt);
         this.rekt = null;
     }
+    public void moveDown(int steps){
+        this.y += steps;
+        this.posy += steps*Constants.squareHeight;
+        this.rekt.relocate(this.posx, this.posy);
+    }
+
 }
