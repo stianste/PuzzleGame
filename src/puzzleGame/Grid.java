@@ -96,7 +96,11 @@ public class Grid {
     }
 
     public Square findMatchingSquare(int x, int y) {
-        return this.squares.stream().filter(s -> s.getX() == x && s.getY() == y).collect(Collectors.toList()).get(0);
+        try{
+            return this.squares.stream().filter(s -> s.getX() == x && s.getY() == y).collect(Collectors.toList()).get(0);
+        }catch(IndexOutOfBoundsException e){
+            return null;
+        }
     }
 
     public void switchSquares(int x, int y) {
@@ -121,6 +125,11 @@ public class Grid {
         removeVertically(leftValue, x, y);
         removeVertically(rightValue, x + 1, y);
         printGrid();
+    }
+    public void removeSquares_simple(int x, int y){
+        removeHorizontally(grid[y][x], x, y);
+        removeVertically(grid[y][x], x, y);
+
     }
 
     private void removeVertically(int value, int x, int y) {
@@ -212,5 +221,6 @@ public class Grid {
                 }
             }
         }
+        IntStream.range(0, (int) Constants.numberOfSquaresHeight).forEach(i -> IntStream.range(0, (int) Constants.numberOfSquaresWidth).forEach(j -> removeSquares_simple(j,i)));
     }
 }

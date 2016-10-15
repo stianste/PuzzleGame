@@ -66,12 +66,15 @@ public class Cursor {
     }
 
     private static void switchSquares() {
-        //-1 at the y position to account for the extra row.
         Square left = grid.findMatchingSquare(x, y);
         Square right = grid.findMatchingSquare(x+1, y);
         grid.switchSquares(x, y);
-        left.moveRight();
-        right.moveLeft();
+        if(left != null){
+            left.moveRight();
+        }
+        if(right != null){
+            right.moveLeft();
+        }
         grid.removeSquares(x, y);
     }
 
@@ -102,18 +105,4 @@ public class Cursor {
             y -= 1;
         }
     }
-    /*
-    public static int getGridPosX(){
-        //Remember to make this one return statement when not printing
-        int n = (int) Math.floor((posX - Constants.playerField_x)/(Constants.squareWidth));
-        System.out.println("Get grid pos: " + n);
-        return n;
-    }
-
-    public static int getGridPosY(){
-        int n = (int) Math.floor((posY - Constants.playerField_y)/(Constants.squareHeight) + 1);
-        System.out.println("Get grid pos: " + n);
-        return n;
-    }
-    */
 }
